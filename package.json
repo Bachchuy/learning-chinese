@@ -6,16 +6,23 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "tsx src/server/db/seed.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.3",
+    "clsx": "^2.1.1",
     "dotenv": "^18.0.7",
     "drizzle-orm": "^0.45.4",
+    "lucide-react": "^1.58.0",
     "next": "16.4.0",
     "postgres": "^3.4.9",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "tailwind-merge": "^3.7.0",
+    "ts-fsrs": "^5.4.2"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",
