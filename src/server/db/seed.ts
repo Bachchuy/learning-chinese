@@ -11,7 +11,7 @@ async function seed() {
 
   try {
     // 1. Tạo hoặc lấy Bộ thẻ hệ thống HSK 1
-    let systemDeck = await db
+    const systemDeck = await db  //truoc do la let systemDeck = await db
       .select()
       .from(decks)
       .where(eq(decks.isSystem, true))

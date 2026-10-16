@@ -1,4 +1,4 @@
-import {
+import {          //*cài đặt Drizzle ORM cho PostgreSQL (ORM là Object Relational Mapping, giúp thao tác DB dễ dàng hơn)
   pgTable,
   serial,
   text,
@@ -11,16 +11,16 @@ import {
   index,
 } from "drizzle-orm/pg-core";
 
-// 1. BẢNG USERS (Đồng bộ từ Supabase Auth)
+// *1. BẢNG USERS (Đồng bộ từ Supabase Auth)
 export const users = pgTable("users", {
-  id: text("id").primaryKey(), // Supabase Auth User UUID
+  id: text("id").primaryKey(), // dòng này là khóa chính, dùng để xác định duy nhất mỗi người dùng
   email: text("email").unique().notNull(),
   fullName: text("full_name"),
   avatarUrl: text("avatar_url"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-// 2. BẢNG WORDS (Kho từ vựng HSK & Từ điển)
+// *2. BẢNG WORDS (Kho từ vựng HSK & Từ điển)
 export const words = pgTable(
   "words",
   {
@@ -39,7 +39,7 @@ export const words = pgTable(
     exampleVi: text("example_vi"), // Câu ví dụ dịch tiếng Việt
     createdAt: timestamp("created_at").defaultNow().notNull(),
   },
-  (table) => [
+  (table) => [    // đây là các chỉ mục (index) giúp tìm kiếm nhanh hơn trong cơ sở dữ liệu
     index("words_hanzi_idx").on(table.hanzi),
     index("words_pinyin_clean_idx").on(table.pinyinClean),
     index("words_hanviet_idx").on(table.hanviet),
