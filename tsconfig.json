@@ -1,19 +1,20 @@
+//file này là cấu hình TypeScript cho dự án Next.js, định nghĩa các tùy chọn biên dịch, các thư viện được sử dụng, cách xử lý module, và các đường dẫn alias để dễ dàng import các module trong dự án. Nó cũng xác định các tệp TypeScript cần bao gồm và loại trừ khỏi quá trình biên dịch.
 {
-  "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "react-jsx",
-    "incremental": true,
-    "plugins": [
+  "compilerOptions": {  // Các tùy chọn biên dịch TypeScript
+    "target": "ES2017",  // Đặt mục tiêu biên dịch sang phiên bản ECMAScript 2017
+    "lib": ["dom", "dom.iterable", "esnext"],  // Bao gồm các thư viện DOM, DOM iterable và ESNext để hỗ trợ các tính năng mới nhất của JavaScript
+    "allowJs": true,  // Cho phép biên dịch các tệp JavaScript
+    "skipLibCheck": true,  // Bỏ qua kiểm tra kiểu cho các tệp thư viện để tăng tốc độ biên dịch
+    "strict": true,  // Bật chế độ kiểm tra kiểu nghiêm ngặt để phát hiện lỗi tiềm ẩn
+    "noEmit": true,  // Không tạo ra các tệp đầu ra, chỉ kiểm tra kiểu
+    "esModuleInterop": true,  // Cho phép tương thích với các module CommonJS
+    "module": "esnext",  // Sử dụng hệ thống module ESNext
+    "moduleResolution": "bundler",  // Sử dụng cơ chế phân giải module của bundler (như Webpack)
+    "resolveJsonModule": true,  // Cho phép import các tệp JSON như module
+    "isolatedModules": true,   // Bật chế độ module cô lập để đảm bảo mỗi tệp được biên dịch độc lập
+    "jsx": "react-jsx",  // Sử dụng chế độ JSX mới của React 17+ để biên dịch các tệp .tsx
+    "incremental": true,  // Bật biên dịch tăng dần để cải thiện tốc độ biên dịch trong các lần chạy tiếp theo
+    "plugins": [  // Các plugin TypeScript được sử dụng trong dự án
       {
         "name": "next"
       }
@@ -22,13 +23,13 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
-    "**/*.mts"
+  "include": [  // Các tệp TypeScript cần bao gồm trong quá trình biên dịch
+    "next-env.d.ts",  // Tệp định nghĩa môi trường Next.js, được tự động tạo ra bởi Next.js để cung cấp các kiểu dữ liệu và khai báo cần thiết cho dự án.
+    "**/*.ts",  // Bao gồm tất cả các tệp TypeScript (.ts) trong dự án
+    "**/*.tsx",  // Bao gồm tất cả các tệp TypeScript React (.tsx) trong dự án
+    ".next/types/**/*.ts",  // Bao gồm các tệp TypeScript được tạo ra bởi Next.js trong thư mục .next/types
+    ".next/dev/types/**/*.ts",  // Bao gồm các tệp TypeScript được tạo ra bởi Next.js trong chế độ phát triển (dev) trong thư mục .next/dev/types
+    "**/*.mts"  // Bao gồm tất cả các tệp TypeScript module (.mts) trong dự án
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"]  // Loại trừ thư mục node_modules khỏi quá trình biên dịch để tránh biên dịch các thư viện bên ngoài
 }

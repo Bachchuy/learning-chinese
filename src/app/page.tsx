@@ -13,9 +13,9 @@ import {
 
 async function HomeDashboard() {
   // Lấy dữ liệu từ cơ sở dữ liệu
-  const allWords = await db.select().from(words).limit(6);
-  const totalWordsCount = (await db.select().from(words)).length;
-  const systemDeck = await db
+  const allWords = await db.select().from(words).limit(6);  // Lấy 6 từ vựng mẫu từ cơ sở dữ liệu để hiển thị trên trang chủ
+  const totalWordsCount = (await db.select().from(words)).length;  // Lấy tổng số từ vựng trong cơ sở dữ liệu để hiển thị trên trang chủ
+  const systemDeck = await db  // Lấy bộ thẻ hệ thống từ cơ sở dữ liệu
     .select()
     .from(decks)
     .where(eq(decks.isSystem, true))
@@ -207,6 +207,7 @@ async function HomeDashboard() {
   );
 }
 
+//DashboardSkeleton là một component React hiển thị giao diện tạm thời (skeleton) trong khi dữ liệu từ cơ sở dữ liệu đang được tải. Nó sử dụng hiệu ứng "animate-pulse" để tạo cảm giác đang tải dữ liệu, giúp người dùng biết rằng nội dung sẽ xuất hiện sớm.
 function DashboardSkeleton() {
   return (
     <div className="space-y-8 animate-pulse">
@@ -221,6 +222,7 @@ function DashboardSkeleton() {
   );
 }
 
+// HomePage là component chính của trang chủ, sử dụng Suspense để hiển thị DashboardSkeleton trong khi HomeDashboard đang tải dữ liệu từ cơ sở dữ liệu. Khi dữ liệu đã sẵn sàng, HomeDashboard sẽ được hiển thị.
 export default function HomePage() {
   return (
     <Suspense fallback={<DashboardSkeleton />}>

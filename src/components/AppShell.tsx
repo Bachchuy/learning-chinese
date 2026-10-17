@@ -14,8 +14,7 @@ import {
   User,  // Icon cho thông tin người dùng
 } from "lucide-react";  // Thư viện icon lucide-react để hiển thị các biểu tượng trong giao diện
 
-//interface nghĩa là gì? Nó định nghĩa kiểu dữ liệu cho props của component AppShell, giúp TypeScript kiểm tra kiểu dữ liệu và hỗ trợ autocomplete khi sử dụng component này.
-// AppShellProps định nghĩa kiểu dữ liệu cho props của component AppShell, trong đó children là một ReactNode (có thể là bất kỳ nội dung React nào) sẽ được hiển thị trong khu vực nội dung chính.
+//interface AppShellProps dùng để định nghĩa kiểu dữ liệu cho props của component AppShell. Nó chỉ có một thuộc tính duy nhất là children, kiểu React.ReactNode, cho phép truyền bất kỳ nội dung React nào vào bên trong AppShell.
 interface AppShellProps {  // Định nghĩa kiểu props cho component AppShell
   children: React.ReactNode;
 }
@@ -50,7 +49,6 @@ export function AppShell({ children }: AppShellProps) {
 
   // Quy chuẩn UX cốt lõi: Ẩn hoàn toàn Bottom Bar khi đang trong phiên ôn tập /review
   const isReviewSession = pathname.startsWith("/review");  // Kiểm tra xem có đang trong phiên ôn tập không
-  // Nếu đang trong phiên ôn tập, ẩn Bottom Bar để tránh phân tâm và chạm nhầm khi học tập.
   //return: trả về cấu trúc giao diện của AppShell, bao gồm sidebar, header, main content và bottom navigation bar. Sử dụng Tailwind CSS để tạo kiểu dáng và bố cục.
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col lg:flex-row">
