@@ -1,21 +1,26 @@
-"use client";
+//file này có chức năng gì? 
+// AppShell là một component chứa cấu trúc tổng quát của ứng dụng, bao gồm sidebar, header, main content và bottom navigation bar.
+"use client";  // Vì AppShell sử dụng hook usePathname từ Next.js, nên cần đánh dấu là "client component" để có thể chạy trên trình duyệt.
 
 import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from "next/link";  // Link từ Next.js để điều hướng giữa các trang mà không reload lại toàn bộ trang
+import { usePathname } from "next/navigation";   // Hook usePathname từ Next.js để lấy đường dẫn hiện tại, giúp xác định trang đang hiển thị và highlight menu tương ứng.
 import {
-  LayoutDashboard,
-  Layers,
-  Search,
-  FolderKanban,
-  BookOpen,
-  User,
-} from "lucide-react";
+  LayoutDashboard,  // Icon cho trang tổng quan
+  Layers,  // Icon cho trang ôn tập
+  Search,  // Icon cho trang từ điển
+  FolderKanban,  // Icon cho trang bộ thẻ
+  BookOpen,  // Icon cho trang từ vựng và chưa dùng đến
+  User,  // Icon cho thông tin người dùng
+} from "lucide-react";  // Thư viện icon lucide-react để hiển thị các biểu tượng trong giao diện
 
-interface AppShellProps {
+//interface nghĩa là gì? Nó định nghĩa kiểu dữ liệu cho props của component AppShell, giúp TypeScript kiểm tra kiểu dữ liệu và hỗ trợ autocomplete khi sử dụng component này.
+// AppShellProps định nghĩa kiểu dữ liệu cho props của component AppShell, trong đó children là một ReactNode (có thể là bất kỳ nội dung React nào) sẽ được hiển thị trong khu vực nội dung chính.
+interface AppShellProps {  // Định nghĩa kiểu props cho component AppShell
   children: React.ReactNode;
 }
 
+// Mảng NAV_ITEMS chứa thông tin về các mục điều hướng trong sidebar và bottom navigation bar, bao gồm đường dẫn (href), nhãn (label) và biểu tượng (icon) tương ứng.
 const NAV_ITEMS = [
   {
     href: "/",
@@ -39,12 +44,14 @@ const NAV_ITEMS = [
   },
 ];
 
+// Component AppShell là khung tổng thể của ứng dụng, bao gồm sidebar, header, main content và bottom navigation bar. Nó nhận props children để hiển thị nội dung chính của từng trang.
 export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname();
 
   // Quy chuẩn UX cốt lõi: Ẩn hoàn toàn Bottom Bar khi đang trong phiên ôn tập /review
-  const isReviewSession = pathname.startsWith("/review");
-
+  const isReviewSession = pathname.startsWith("/review");  // Kiểm tra xem có đang trong phiên ôn tập không
+  // Nếu đang trong phiên ôn tập, ẩn Bottom Bar để tránh phân tâm và chạm nhầm khi học tập.
+  //return: trả về cấu trúc giao diện của AppShell, bao gồm sidebar, header, main content và bottom navigation bar. Sử dụng Tailwind CSS để tạo kiểu dáng và bố cục.
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col lg:flex-row">
       {/* 1. SIDEBAR CHO DESKTOP (>= 1024px) */}

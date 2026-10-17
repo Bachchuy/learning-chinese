@@ -1,0 +1,512 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 960" width="1440" height="960" style="background:#ffffff; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Shadow filter for tables -->
+    <filter id="card-shadow" x="-3%" y="-2%" width="106%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.08" />
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000000" flood-opacity="0.04" />
+    </filter>
+
+    <!-- Markers for connector lines -->
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563eb" />
+    </marker>
+    <marker id="arr-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669" />
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#15803d" />
+    </marker>
+  </defs>
+
+  <!-- PURE WHITE BACKGROUND -->
+  <rect width="1440" height="960" fill="#ffffff" />
+
+  <!-- DIAGRAM TITLE & SUBTITLE -->
+  <text x="720" y="45" text-anchor="middle" font-size="20" font-weight="900" fill="#0f172a" letter-spacing="1">
+    LEARNING CHINESE — COMPLETE DATABASE RELATIONSHIP DIAGRAM (ERD)
+  </text>
+  <text x="720" y="68" text-anchor="middle" font-size="12" font-weight="500" fill="#64748b">
+    Architecture: PostgreSQL + Supabase | Drizzle ORM | 6 Core Models | FSRS Spaced Repetition | HSK 1 Curriculum
+  </text>
+
+  <!-- ================= SVG CONNECTOR LINES ================= -->
+
+  <!-- 1. USERS -> DECKS (1:N) [Blue] -->
+  <path d="M 180 240 L 180 310" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-blue)" />
+  <rect x="170" y="247" width="20" height="15" rx="3" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="180" y="259" text-anchor="middle" font-size="10" font-weight="700" fill="#1e40af">1</text>
+  <rect x="170" y="286" width="20" height="15" rx="3" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="180" y="298" text-anchor="middle" font-size="10" font-weight="700" fill="#1e40af">N</text>
+
+  <!-- 2. USERS -> CARD_STATES (1:N) [Blue] -->
+  <path d="M 350 143 L 425 143 L 425 346 L 500 346" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-blue)" />
+  <rect x="358" y="135" width="20" height="15" rx="3" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="368" y="147" text-anchor="middle" font-size="10" font-weight="700" fill="#1e40af">1</text>
+  <rect x="472" y="338" width="20" height="15" rx="3" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="482" y="350" text-anchor="middle" font-size="10" font-weight="700" fill="#1e40af">N</text>
+
+  <!-- 3. USERS -> REVIEW_LOGS (1:N) [Blue] -->
+  <path d="M 60 143 L 30 143 L 30 691 L 500 691" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-blue)" />
+  <rect x="38" y="135" width="20" height="15" rx="3" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="48" y="147" text-anchor="middle" font-size="10" font-weight="700" fill="#1e40af">1</text>
+  <rect x="472" y="683" width="20" height="15" rx="3" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="482" y="695" text-anchor="middle" font-size="10" font-weight="700" fill="#1e40af">N</text>
+
+  <!-- 4. DECKS -> DECK_CARDS (1:N) [Emerald] -->
+  <path d="M 350 358 L 445 358 L 445 167 L 500 167" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#arr-emerald)" />
+  <rect x="358" y="350" width="20" height="15" rx="3" fill="#ffffff" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="368" y="362" text-anchor="middle" font-size="10" font-weight="700" fill="#047857">1</text>
+  <rect x="472" y="159" width="20" height="15" rx="3" fill="#ffffff" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="482" y="171" text-anchor="middle" font-size="10" font-weight="700" fill="#047857">N</text>
+
+  <!-- 5. DECKS -> REVIEW_LOGS (0..1:N) [Emerald dashed] -->
+  <path d="M 350 470 L 415 470 L 415 735 L 500 735" fill="none" stroke="#059669" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arr-emerald)" />
+  <rect x="358" y="462" width="20" height="15" rx="3" fill="#ffffff" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="368" y="474" text-anchor="middle" font-size="10" font-weight="700" fill="#047857">1</text>
+  <rect x="472" y="727" width="20" height="15" rx="3" fill="#ffffff" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="482" y="739" text-anchor="middle" font-size="10" font-weight="700" fill="#047857">N</text>
+
+  <!-- 6. WORDS -> DECK_CARDS (1:N) [Green] -->
+  <path d="M 960 143 L 905 143 L 905 191 L 850 191" fill="none" stroke="#15803d" stroke-width="2" marker-end="url(#arr-green)" />
+  <rect x="932" y="135" width="20" height="15" rx="3" fill="#ffffff" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="942" y="147" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">1</text>
+  <rect x="858" y="183" width="20" height="15" rx="3" fill="#ffffff" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="868" y="195" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">N</text>
+
+  <!-- 7. WORDS -> CARD_STATES (1:N) [Green] -->
+  <path d="M 960 369 L 850 369" fill="none" stroke="#15803d" stroke-width="2" marker-end="url(#arr-green)" />
+  <rect x="932" y="361" width="20" height="15" rx="3" fill="#ffffff" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="942" y="373" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">1</text>
+  <rect x="858" y="361" width="20" height="15" rx="3" fill="#ffffff" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="868" y="373" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">N</text>
+
+  <!-- 8. WORDS -> REVIEW_LOGS (1:N) [Green] (ĐÃ SỬA: Xuất phát từ đáy bảng WORDS (x=1020, y=455) đi xuống rồi rẽ vào word_id của REVIEW_LOGS) -->
+  <path d="M 1020 455 L 1020 713 L 850 713" fill="none" stroke="#15803d" stroke-width="2" marker-end="url(#arr-green)" />
+  <rect x="1010" y="468" width="20" height="15" rx="3" fill="#ffffff" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="1020" y="480" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">1</text>
+  <rect x="858" y="705" width="20" height="15" rx="3" fill="#ffffff" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="868" y="717" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">N</text>
+  <!-- Nhãn giải thích rõ ràng -->
+  <text x="1030" y="590" font-size="10" font-style="italic" fill="#15803d" font-weight="600">words.id ➔ review_logs.word_id</text>
+
+  <!-- ================= TABLE 1: USERS ================= -->
+  <g transform="translate(60, 95)" filter="url(#card-shadow)">
+    <rect width="290" height="145" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+    <path d="M 0 8 Q 0 0 8 0 L 282 0 Q 290 0 290 8 L 290 32 L 0 32 Z" fill="#1d4ed8" />
+    <text x="14" y="21" fill="#ffffff" font-size="13" font-weight="800">USERS</text>
+    <rect x="195" y="7" width="85" height="18" rx="9" fill="#ffffff" fill-opacity="0.2" />
+    <text x="237" y="20" text-anchor="middle" fill="#ffffff" font-size="9.5" font-weight="500">Auth &amp; Profile</text>
+
+    <!-- id -->
+    <rect x="14" y="41" width="18" height="13" rx="3" fill="#fef08a" stroke="#fde047" stroke-width="0.8"/>
+    <text x="23" y="51" text-anchor="middle" font-size="8.5" font-weight="800" fill="#854d0e">PK</text>
+    <text x="38" y="52" font-size="11" font-weight="700" fill="#0f172a" font-family="monospace">id</text>
+    <text x="276" y="52" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">text (UID)</text>
+    <line x1="14" y1="59" x2="276" y2="59" stroke="#f1f5f9" />
+
+    <!-- email -->
+    <rect x="14" y="65" width="18" height="13" rx="3" fill="#dcfce7" stroke="#bbf7d0" stroke-width="0.8"/>
+    <text x="23" y="75" text-anchor="middle" font-size="8.5" font-weight="800" fill="#166534">UK</text>
+    <text x="38" y="76" font-size="11" font-weight="600" fill="#1e293b" font-family="monospace">email</text>
+    <text x="276" y="76" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">text</text>
+    <line x1="14" y1="83" x2="276" y2="83" stroke="#f1f5f9" />
+
+    <!-- full_name -->
+    <circle cx="23" cy="95" r="2" fill="#94a3b8" />
+    <text x="38" y="99" font-size="11" fill="#334155" font-family="monospace">full_name</text>
+    <text x="276" y="99" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">text</text>
+    <line x1="14" y1="105" x2="276" y2="105" stroke="#f1f5f9" />
+
+    <!-- avatar_url -->
+    <circle cx="23" cy="116" r="2" fill="#94a3b8" />
+    <text x="38" y="120" font-size="11" fill="#334155" font-family="monospace">avatar_url</text>
+    <text x="276" y="120" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">text</text>
+    <line x1="14" y1="126" x2="276" y2="126" stroke="#f1f5f9" />
+
+    <!-- created_at -->
+    <circle cx="23" cy="136" r="2" fill="#94a3b8" />
+    <text x="38" y="139" font-size="11" fill="#334155" font-family="monospace">created_at</text>
+    <text x="276" y="139" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">timestamp</text>
+  </g>
+
+  <!-- ================= TABLE 2: DECKS ================= -->
+  <g transform="translate(60, 310)" filter="url(#card-shadow)">
+    <rect width="290" height="205" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+    <path d="M 0 8 Q 0 0 8 0 L 282 0 Q 290 0 290 8 L 290 32 L 0 32 Z" fill="#059669" />
+    <text x="14" y="21" fill="#ffffff" font-size="13" font-weight="800">DECKS</text>
+    <rect x="200" y="7" width="80" height="18" rx="9" fill="#ffffff" fill-opacity="0.2" />
+    <text x="240" y="20" text-anchor="middle" fill="#ffffff" font-size="9.5" font-weight="500">Study Decks</text>
+
+    <!-- id -->
+    <rect x="14" y="41" width="18" height="13" rx="3" fill="#fef08a" stroke="#fde047" stroke-width="0.8"/>
+    <text x="23" y="51" text-anchor="middle" font-size="8.5" font-weight="800" fill="#854d0e">PK</text>
+    <text x="38" y="52" font-size="11" font-weight="700" fill="#0f172a" font-family="monospace">id</text>
+    <text x="276" y="52" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">uuid</text>
+    <line x1="14" y1="59" x2="276" y2="59" stroke="#f1f5f9" />
+
+    <!-- user_id -->
+    <rect x="14" y="65" width="18" height="13" rx="3" fill="#dbeafe" stroke="#bfdbfe" stroke-width="0.8"/>
+    <text x="23" y="75" text-anchor="middle" font-size="8.5" font-weight="800" fill="#1e40af">FK</text>
+    <text x="38" y="76" font-size="11" font-weight="600" fill="#1e3a8a" font-family="monospace">user_id</text>
+    <text x="276" y="76" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">text (null=sys)</text>
+    <line x1="14" y1="83" x2="276" y2="83" stroke="#f1f5f9" />
+
+    <!-- name -->
+    <circle cx="23" cy="95" r="2" fill="#94a3b8" />
+    <text x="38" y="99" font-size="11" font-weight="600" fill="#0f172a" font-family="monospace">name</text>
+    <text x="276" y="99" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">text</text>
+    <line x1="14" y1="105" x2="276" y2="105" stroke="#f1f5f9" />
+
+    <!-- description -->
+    <circle cx="23" cy="116" r="2" fill="#94a3b8" />
+    <text x="38" y="120" font-size="11" fill="#334155" font-family="monospace">description</text>
+    <text x="276" y="120" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">text</text>
+    <line x1="14" y1="126" x2="276" y2="126" stroke="#f1f5f9" />
+
+    <!-- is_system -->
+    <circle cx="23" cy="138" r="2" fill="#94a3b8" />
+    <text x="38" y="142" font-size="11" fill="#334155" font-family="monospace">is_system</text>
+    <text x="276" y="142" text-anchor="end" font-size="10" fill="#059669" font-weight="600" font-family="monospace">boolean</text>
+    <line x1="14" y1="148" x2="276" y2="148" stroke="#f1f5f9" />
+
+    <!-- created_at -->
+    <circle cx="23" cy="160" r="2" fill="#94a3b8" />
+    <text x="38" y="164" font-size="11" fill="#334155" font-family="monospace">created_at</text>
+    <text x="276" y="164" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">timestamp</text>
+    <line x1="14" y1="170" x2="276" y2="170" stroke="#f1f5f9" />
+
+    <!-- updated_at -->
+    <circle cx="23" cy="182" r="2" fill="#94a3b8" />
+    <text x="38" y="186" font-size="11" fill="#334155" font-family="monospace">updated_at</text>
+    <text x="276" y="186" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">timestamp</text>
+  </g>
+
+  <!-- ================= TABLE 3: DECK_CARDS ================= -->
+  <g transform="translate(500, 95)" filter="url(#card-shadow)">
+    <rect width="350" height="135" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+    <path d="M 0 8 Q 0 0 8 0 L 342 0 Q 350 0 350 8 L 350 32 L 0 32 Z" fill="#7c3aed" />
+    <text x="14" y="21" fill="#ffffff" font-size="13" font-weight="800">DECK_CARDS</text>
+    <rect x="235" y="7" width="105" height="18" rx="9" fill="#ffffff" fill-opacity="0.2" />
+    <text x="287" y="20" text-anchor="middle" fill="#ffffff" font-size="9.5" font-weight="500">Deck Vocab (N-N)</text>
+
+    <!-- id -->
+    <rect x="14" y="41" width="18" height="13" rx="3" fill="#fef08a" stroke="#fde047" stroke-width="0.8"/>
+    <text x="23" y="51" text-anchor="middle" font-size="8.5" font-weight="800" fill="#854d0e">PK</text>
+    <text x="38" y="52" font-size="11" font-weight="700" fill="#0f172a" font-family="monospace">id</text>
+    <text x="336" y="52" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">serial</text>
+    <line x1="14" y1="59" x2="336" y2="59" stroke="#f1f5f9" />
+
+    <!-- deck_id -->
+    <rect x="14" y="65" width="18" height="13" rx="3" fill="#dbeafe" stroke="#bfdbfe" stroke-width="0.8"/>
+    <text x="23" y="75" text-anchor="middle" font-size="8.5" font-weight="800" fill="#1e40af">FK</text>
+    <text x="38" y="76" font-size="11" font-weight="600" fill="#1e3a8a" font-family="monospace">deck_id</text>
+    <text x="336" y="76" text-anchor="end" font-size="10" fill="#7c3aed" font-family="monospace">uuid (decks.id)</text>
+    <line x1="14" y1="83" x2="336" y2="83" stroke="#f1f5f9" />
+
+    <!-- word_id -->
+    <rect x="14" y="89" width="18" height="13" rx="3" fill="#dbeafe" stroke="#bfdbfe" stroke-width="0.8"/>
+    <text x="23" y="99" text-anchor="middle" font-size="8.5" font-weight="800" fill="#1e40af">FK</text>
+    <text x="38" y="100" font-size="11" font-weight="600" fill="#1e3a8a" font-family="monospace">word_id</text>
+    <text x="336" y="100" text-anchor="end" font-size="10" fill="#15803d" font-family="monospace">integer (words.id)</text>
+    <line x1="14" y1="107" x2="336" y2="107" stroke="#f1f5f9" />
+
+    <!-- created_at -->
+    <circle cx="23" cy="119" r="2" fill="#94a3b8" />
+    <text x="38" y="123" font-size="11" fill="#334155" font-family="monospace">created_at</text>
+    <text x="336" y="123" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">timestamp</text>
+  </g>
+
+  <!-- ================= TABLE 4: CARD_STATES ================= -->
+  <g transform="translate(500, 275)" filter="url(#card-shadow)">
+    <rect width="350" height="295" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+    <path d="M 0 8 Q 0 0 8 0 L 342 0 Q 350 0 350 8 L 350 32 L 0 32 Z" fill="#4338ca" />
+    <text x="14" y="21" fill="#ffffff" font-size="13" font-weight="800">CARD_STATES</text>
+    <rect x="225" y="7" width="115" height="18" rx="9" fill="#ffffff" fill-opacity="0.2" />
+    <text x="282" y="20" text-anchor="middle" fill="#ffffff" font-size="9.5" font-weight="500">FSRS Memory Engine</text>
+
+    <!-- id -->
+    <rect x="14" y="41" width="18" height="13" rx="3" fill="#fef08a" stroke="#fde047" stroke-width="0.8"/>
+    <text x="23" y="51" text-anchor="middle" font-size="8.5" font-weight="800" fill="#854d0e">PK</text>
+    <text x="38" y="52" font-size="11" font-weight="700" fill="#0f172a" font-family="monospace">id</text>
+    <text x="336" y="52" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">serial</text>
+    <line x1="14" y1="59" x2="336" y2="59" stroke="#f1f5f9" />
+
+    <!-- user_id -->
+    <rect x="14" y="64" width="18" height="13" rx="3" fill="#dbeafe" stroke="#bfdbfe" stroke-width="0.8"/>
+    <text x="23" y="74" text-anchor="middle" font-size="8.5" font-weight="800" fill="#1e40af">FK</text>
+    <text x="38" y="75" font-size="11" font-weight="600" fill="#1e3a8a" font-family="monospace">user_id</text>
+    <text x="336" y="75" text-anchor="end" font-size="10" fill="#1d4ed8" font-family="monospace">text (users.id)</text>
+    <line x1="14" y1="82" x2="336" y2="82" stroke="#f1f5f9" />
+
+    <!-- word_id -->
+    <rect x="14" y="87" width="18" height="13" rx="3" fill="#dbeafe" stroke="#bfdbfe" stroke-width="0.8"/>
+    <text x="23" y="97" text-anchor="middle" font-size="8.5" font-weight="800" fill="#1e40af">FK</text>
+    <text x="38" y="98" font-size="11" font-weight="600" fill="#1e3a8a" font-family="monospace">word_id</text>
+    <text x="336" y="98" text-anchor="end" font-size="10" fill="#15803d" font-family="monospace">integer (words.id)</text>
+    <line x1="14" y1="105" x2="336" y2="105" stroke="#f1f5f9" />
+
+    <!-- state -->
+    <circle cx="23" cy="116" r="2" fill="#94a3b8" />
+    <text x="38" y="120" font-size="11" fill="#334155" font-family="monospace">state</text>
+    <text x="336" y="120" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">integer (0..3)</text>
+    <line x1="14" y1="126" x2="336" y2="126" stroke="#f1f5f9" />
+
+    <!-- due -->
+    <circle cx="23" cy="138" r="2" fill="#4338ca" />
+    <text x="38" y="142" font-size="11" font-weight="700" fill="#312e81" font-family="monospace">due</text>
+    <text x="336" y="142" text-anchor="end" font-size="10" font-weight="600" fill="#4338ca" font-family="monospace">timestamp (IDX)</text>
+    <line x1="14" y1="148" x2="336" y2="148" stroke="#f1f5f9" />
+
+    <!-- stability -->
+    <circle cx="23" cy="159" r="2" fill="#94a3b8" />
+    <text x="38" y="163" font-size="11" fill="#334155" font-family="monospace">stability</text>
+    <text x="336" y="163" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">real (FSRS S)</text>
+    <line x1="14" y1="169" x2="336" y2="169" stroke="#f1f5f9" />
+
+    <!-- difficulty -->
+    <circle cx="23" cy="180" r="2" fill="#94a3b8" />
+    <text x="38" y="184" font-size="11" fill="#334155" font-family="monospace">difficulty</text>
+    <text x="336" y="184" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">real (FSRS D)</text>
+    <line x1="14" y1="190" x2="336" y2="190" stroke="#f1f5f9" />
+
+    <!-- elapsed_days -->
+    <circle cx="23" cy="201" r="2" fill="#94a3b8" />
+    <text x="38" y="205" font-size="11" fill="#334155" font-family="monospace">elapsed_days</text>
+    <text x="336" y="205" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">integer</text>
+    <line x1="14" y1="211" x2="336" y2="211" stroke="#f1f5f9" />
+
+    <!-- scheduled_days -->
+    <circle cx="23" cy="222" r="2" fill="#94a3b8" />
+    <text x="38" y="226" font-size="11" fill="#334155" font-family="monospace">scheduled_days</text>
+    <text x="336" y="226" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">integer</text>
+    <line x1="14" y1="232" x2="336" y2="232" stroke="#f1f5f9" />
+
+    <!-- reps / lapses -->
+    <circle cx="23" cy="243" r="2" fill="#94a3b8" />
+    <text x="38" y="247" font-size="11" fill="#334155" font-family="monospace">reps / lapses</text>
+    <text x="336" y="247" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">int / int</text>
+    <line x1="14" y1="253" x2="336" y2="253" stroke="#f1f5f9" />
+
+    <!-- last_review -->
+    <circle cx="23" cy="265" r="2" fill="#94a3b8" />
+    <text x="38" y="269" font-size="11" fill="#334155" font-family="monospace">last_review</text>
+    <text x="336" y="269" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">timestamp</text>
+    <line x1="14" y1="274" x2="336" y2="274" stroke="#f1f5f9" />
+
+    <!-- UNIQUE INDEX -->
+    <text x="175" y="287" text-anchor="middle" font-size="9" font-style="italic" fill="#4338ca">⚡ UNIQUE(user_id, word_id) • INDEX(user_id, due)</text>
+  </g>
+
+  <!-- ================= TABLE 5: WORDS ================= -->
+  <g transform="translate(960, 95)" filter="url(#card-shadow)">
+    <rect width="420" height="360" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+    <path d="M 0 8 Q 0 0 8 0 L 412 0 Q 420 0 420 8 L 420 32 L 0 32 Z" fill="#15803d" />
+    <text x="14" y="21" fill="#ffffff" font-size="13" font-weight="800">WORDS</text>
+    <rect x="285" y="7" width="125" height="18" rx="9" fill="#ffffff" fill-opacity="0.2" />
+    <text x="347" y="20" text-anchor="middle" fill="#ffffff" font-size="9.5" font-weight="500">HSK Word Bank (150+)</text>
+
+    <!-- id -->
+    <rect x="14" y="41" width="18" height="13" rx="3" fill="#fef08a" stroke="#fde047" stroke-width="0.8"/>
+    <text x="23" y="51" text-anchor="middle" font-size="8.5" font-weight="800" fill="#854d0e">PK</text>
+    <text x="38" y="52" font-size="11" font-weight="700" fill="#0f172a" font-family="monospace">id</text>
+    <text x="406" y="52" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">serial</text>
+    <line x1="14" y1="58" x2="406" y2="58" stroke="#f1f5f9" />
+
+    <!-- hanzi -->
+    <circle cx="23" cy="69" r="2" fill="#15803d" />
+    <text x="38" y="73" font-size="11" font-weight="700" fill="#0f172a" font-family="monospace">hanzi</text>
+    <text x="406" y="73" text-anchor="end" font-size="10" fill="#15803d" font-weight="600" font-family="monospace">text (Giản thể - IDX)</text>
+    <line x1="14" y1="79" x2="406" y2="79" stroke="#f1f5f9" />
+
+    <!-- traditional -->
+    <circle cx="23" cy="90" r="2" fill="#94a3b8" />
+    <text x="38" y="94" font-size="11" fill="#334155" font-family="monospace">traditional</text>
+    <text x="406" y="94" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">text (Phồn thể)</text>
+    <line x1="14" y1="100" x2="406" y2="100" stroke="#f1f5f9" />
+
+    <!-- pinyin -->
+    <circle cx="23" cy="111" r="2" fill="#94a3b8" />
+    <text x="38" y="115" font-size="11" font-weight="600" fill="#0f172a" font-family="monospace">pinyin</text>
+    <text x="406" y="115" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">text (xuésheng)</text>
+    <line x1="14" y1="121" x2="406" y2="121" stroke="#f1f5f9" />
+
+    <!-- pinyin_clean -->
+    <circle cx="23" cy="132" r="2" fill="#15803d" />
+    <text x="38" y="136" font-size="11" fill="#334155" font-family="monospace">pinyin_clean</text>
+    <text x="406" y="136" text-anchor="end" font-size="10" fill="#15803d" font-family="monospace">text (xuesheng - IDX)</text>
+    <line x1="14" y1="142" x2="406" y2="142" stroke="#f1f5f9" />
+
+    <!-- hanviet -->
+    <circle cx="23" cy="153" r="2" fill="#d97706" />
+    <text x="38" y="157" font-size="11" font-weight="700" fill="#b45309" font-family="monospace">hanviet</text>
+    <text x="406" y="157" text-anchor="end" font-size="10" fill="#b45309" font-weight="600" font-family="monospace">text (HỌC SINH - IDX)</text>
+    <line x1="14" y1="163" x2="406" y2="163" stroke="#f1f5f9" />
+
+    <!-- meaning_vi -->
+    <circle cx="23" cy="174" r="2" fill="#94a3b8" />
+    <text x="38" y="178" font-size="11" font-weight="600" fill="#0f172a" font-family="monospace">meaning_vi</text>
+    <text x="406" y="178" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">text NOT NULL</text>
+    <line x1="14" y1="184" x2="406" y2="184" stroke="#f1f5f9" />
+
+    <!-- meaning_en -->
+    <circle cx="23" cy="195" r="2" fill="#94a3b8" />
+    <text x="38" y="199" font-size="11" fill="#334155" font-family="monospace">meaning_en</text>
+    <text x="406" y="199" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">text (CC-CEDICT)</text>
+    <line x1="14" y1="205" x2="406" y2="205" stroke="#f1f5f9" />
+
+    <!-- parts_of_speech -->
+    <circle cx="23" cy="216" r="2" fill="#94a3b8" />
+    <text x="38" y="220" font-size="11" fill="#334155" font-family="monospace">parts_of_speech</text>
+    <text x="406" y="220" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">text (noun, verb...)</text>
+    <line x1="14" y1="226" x2="406" y2="226" stroke="#f1f5f9" />
+
+    <!-- hsk_level -->
+    <circle cx="23" cy="237" r="2" fill="#15803d" />
+    <text x="38" y="241" font-size="11" font-weight="700" fill="#0f172a" font-family="monospace">hsk_level</text>
+    <text x="406" y="241" text-anchor="end" font-size="10" fill="#15803d" font-weight="700" font-family="monospace">int (Default 1 - IDX)</text>
+    <line x1="14" y1="247" x2="406" y2="247" stroke="#f1f5f9" />
+
+    <!-- example_hanzi / pinyin / vi -->
+    <circle cx="23" cy="258" r="2" fill="#94a3b8" />
+    <text x="38" y="262" font-size="11" fill="#334155" font-family="monospace">example_hanzi</text>
+    <text x="406" y="262" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">text</text>
+    <line x1="14" y1="268" x2="406" y2="268" stroke="#f1f5f9" />
+
+    <circle cx="23" cy="279" r="2" fill="#94a3b8" />
+    <text x="38" y="283" font-size="11" fill="#334155" font-family="monospace">example_pinyin</text>
+    <text x="406" y="283" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">text</text>
+    <line x1="14" y1="289" x2="406" y2="289" stroke="#f1f5f9" />
+
+    <circle cx="23" cy="300" r="2" fill="#94a3b8" />
+    <text x="38" y="304" font-size="11" fill="#334155" font-family="monospace">example_vi</text>
+    <text x="406" y="304" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">text</text>
+    <line x1="14" y1="310" x2="406" y2="310" stroke="#f1f5f9" />
+
+    <!-- created_at -->
+    <circle cx="23" cy="321" r="2" fill="#94a3b8" />
+    <text x="38" y="325" font-size="11" fill="#334155" font-family="monospace">created_at</text>
+    <text x="406" y="325" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">timestamp</text>
+    <line x1="14" y1="331" x2="406" y2="331" stroke="#f1f5f9" />
+
+    <text x="210" y="347" text-anchor="middle" font-size="9" font-style="italic" fill="#15803d">Indexes on (hanzi), (pinyin_clean), (hanviet), (hsk_level)</text>
+  </g>
+
+  <!-- ================= TABLE 6: REVIEW_LOGS ================= -->
+  <g transform="translate(500, 620)" filter="url(#card-shadow)">
+    <rect width="350" height="240" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+    <path d="M 0 8 Q 0 0 8 0 L 342 0 Q 350 0 350 8 L 350 32 L 0 32 Z" fill="#be123c" />
+    <text x="14" y="21" fill="#ffffff" font-size="13" font-weight="800">REVIEW_LOGS</text>
+    <rect x="235" y="7" width="105" height="18" rx="9" fill="#ffffff" fill-opacity="0.2" />
+    <text x="287" y="20" text-anchor="middle" fill="#ffffff" font-size="9.5" font-weight="500">Review History</text>
+
+    <!-- id -->
+    <rect x="14" y="41" width="18" height="13" rx="3" fill="#fef08a" stroke="#fde047" stroke-width="0.8"/>
+    <text x="23" y="51" text-anchor="middle" font-size="8.5" font-weight="800" fill="#854d0e">PK</text>
+    <text x="38" y="52" font-size="11" font-weight="700" fill="#0f172a" font-family="monospace">id</text>
+    <text x="336" y="52" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">serial</text>
+    <line x1="14" y1="58" x2="336" y2="58" stroke="#f1f5f9" />
+
+    <!-- user_id -->
+    <rect x="14" y="64" width="18" height="13" rx="3" fill="#dbeafe" stroke="#bfdbfe" stroke-width="0.8"/>
+    <text x="23" y="74" text-anchor="middle" font-size="8.5" font-weight="800" fill="#1e40af">FK</text>
+    <text x="38" y="75" font-size="11" font-weight="600" fill="#1e3a8a" font-family="monospace">user_id</text>
+    <text x="336" y="75" text-anchor="end" font-size="10" fill="#1d4ed8" font-family="monospace">text (users.id)</text>
+    <line x1="14" y1="81" x2="336" y2="81" stroke="#f1f5f9" />
+
+    <!-- word_id -->
+    <rect x="14" y="86" width="18" height="13" rx="3" fill="#dbeafe" stroke="#bfdbfe" stroke-width="0.8"/>
+    <text x="23" y="96" text-anchor="middle" font-size="8.5" font-weight="800" fill="#1e40af">FK</text>
+    <text x="38" y="97" font-size="11" font-weight="600" fill="#1e3a8a" font-family="monospace">word_id</text>
+    <text x="336" y="97" text-anchor="end" font-size="10" fill="#15803d" font-family="monospace">integer (words.id)</text>
+    <line x1="14" y1="103" x2="336" y2="103" stroke="#f1f5f9" />
+
+    <!-- deck_id -->
+    <rect x="14" y="108" width="18" height="13" rx="3" fill="#dbeafe" stroke="#bfdbfe" stroke-width="0.8"/>
+    <text x="23" y="118" text-anchor="middle" font-size="8.5" font-weight="800" fill="#1e40af">FK</text>
+    <text x="38" y="119" font-size="11" font-weight="600" fill="#1e3a8a" font-family="monospace">deck_id</text>
+    <text x="336" y="119" text-anchor="end" font-size="10" fill="#059669" font-family="monospace">uuid (decks.id, null)</text>
+    <line x1="14" y1="125" x2="336" y2="125" stroke="#f1f5f9" />
+
+    <!-- grade -->
+    <circle cx="23" cy="136" r="2" fill="#be123c" />
+    <text x="38" y="140" font-size="11" font-weight="700" fill="#9f1239" font-family="monospace">grade</text>
+    <text x="336" y="140" text-anchor="end" font-size="10" font-weight="600" fill="#be123c" font-family="monospace">int (1:Again..4:Easy)</text>
+    <line x1="14" y1="147" x2="336" y2="147" stroke="#f1f5f9" />
+
+    <!-- state -->
+    <circle cx="23" cy="158" r="2" fill="#94a3b8" />
+    <text x="38" y="162" font-size="11" fill="#334155" font-family="monospace">state</text>
+    <text x="336" y="162" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">integer</text>
+    <line x1="14" y1="169" x2="336" y2="169" stroke="#f1f5f9" />
+
+    <!-- due -->
+    <circle cx="23" cy="180" r="2" fill="#94a3b8" />
+    <text x="38" y="184" font-size="11" fill="#334155" font-family="monospace">due</text>
+    <text x="336" y="184" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">timestamp</text>
+    <line x1="14" y1="191" x2="336" y2="191" stroke="#f1f5f9" />
+
+    <!-- stability / difficulty -->
+    <circle cx="23" cy="202" r="2" fill="#94a3b8" />
+    <text x="38" y="206" font-size="11" fill="#334155" font-family="monospace">stability / difficulty</text>
+    <text x="336" y="206" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">real / real</text>
+    <line x1="14" y1="213" x2="336" y2="213" stroke="#f1f5f9" />
+
+    <!-- reviewed_at -->
+    <circle cx="23" cy="224" r="2" fill="#94a3b8" />
+    <text x="38" y="228" font-size="11" font-weight="600" fill="#0f172a" font-family="monospace">reviewed_at</text>
+    <text x="336" y="228" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">timestamp</text>
+  </g>
+
+  <!-- ================= BOTTOM LEGEND CONTAINER ================= -->
+  <g transform="translate(60, 885)">
+    <rect width="1320" height="55" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+    <text x="16" y="18" font-size="10" font-weight="800" fill="#334155" letter-spacing="0.5">DIAGRAM LEGEND &amp; DOMAIN MODULES</text>
+
+    <!-- Badges -->
+    <g transform="translate(16, 26)">
+      <!-- Auth & Users -->
+      <rect x="0" y="0" width="85" height="18" rx="3" fill="#1d4ed8" />
+      <text x="42" y="12" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff">Auth &amp; Users</text>
+
+      <!-- Study Decks -->
+      <rect x="95" y="0" width="85" height="18" rx="3" fill="#059669" />
+      <text x="137" y="12" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff">Study Decks</text>
+
+      <!-- Deck Cards (N-N) -->
+      <rect x="190" y="0" width="105" height="18" rx="3" fill="#7c3aed" />
+      <text x="242" y="12" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff">Deck Vocab (N-N)</text>
+
+      <!-- Vocab Bank -->
+      <rect x="305" y="0" width="100" height="18" rx="3" fill="#15803d" />
+      <text x="355" y="12" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff">Vocab &amp; HSK Bank</text>
+
+      <!-- FSRS State -->
+      <rect x="415" y="0" width="115" height="18" rx="3" fill="#4338ca" />
+      <text x="472" y="12" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff">FSRS Memory State</text>
+
+      <!-- Review History -->
+      <rect x="540" y="0" width="95" height="18" rx="3" fill="#be123c" />
+      <text x="587" y="12" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff">Review History</text>
+    </g>
+
+    <!-- Key Types & Relations on the right -->
+    <g transform="translate(850, 36)">
+      <text x="0" y="0" font-size="10" font-weight="700" fill="#475569">Key Types:</text>
+      
+      <rect x="65" y="-10" width="18" height="13" rx="3" fill="#fef08a" stroke="#fde047" stroke-width="0.8"/>
+      <text x="74" y="0" text-anchor="middle" font-size="8.5" font-weight="800" fill="#854d0e">PK</text>
+      <text x="88" y="0" font-size="10" fill="#334155">Primary Key</text>
+
+      <rect x="160" y="-10" width="18" height="13" rx="3" fill="#dbeafe" stroke="#bfdbfe" stroke-width="0.8"/>
+      <text x="169" y="0" text-anchor="middle" font-size="8.5" font-weight="800" fill="#1e40af">FK</text>
+      <text x="183" y="0" font-size="10" fill="#334155">Foreign Key</text>
+
+      <rect x="255" y="-10" width="18" height="13" rx="3" fill="#dcfce7" stroke="#bbf7d0" stroke-width="0.8"/>
+      <text x="264" y="0" text-anchor="middle" font-size="8.5" font-weight="800" fill="#166534">UK</text>
+      <text x="278" y="0" font-size="10" fill="#334155">Unique Key</text>
+
+      <line x1="345" y1="-10" x2="345" y2="4" stroke="#cbd5e1" />
+      <text x="355" y="0" font-size="10" font-weight="600" fill="#475569">Relations: 1 : N (One-to-Many)</text>
+    </g>
+  </g>
+</svg>
