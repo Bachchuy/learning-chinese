@@ -2113,5 +2113,19 @@ export const HSK1_WORDS: HSKWordSeed[] = [
     exampleHanzi: "请坐，不要客气。",
     examplePinyin: "Qǐng zuò, bú yào kèqi.",
     exampleVi: "Xin mời ngồi, đừng khách sáo."
+  },
+  {
+    hanzi: "你好",
+    traditional: "你好",
+    pinyin: "nǐhǎo",
+    pinyinClean: "nihao",
+    hanviet: "NHĨ HẢO",
+    meaningVi: "xin chào, chào bạn",
+    meaningEn: "hello; hi",
+    partsOfSpeech: "thán từ",
+    hskLevel: 1,
+    exampleHanzi: "你好，很高兴认识你！",
+    examplePinyin: "Nǐ hǎo, hěn gāoxìng rènshi nǐ!",
+    exampleVi: "Xin chào, rất vui được làm quen với bạn!"
   }
 ];

@@ -1,8 +1,3 @@
-/**
- * src/app/api/dictionary/search/route.ts
- * API Tra cứu từ điển HSK tốc độ cao.
- */
-
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/server/db";
 import { words } from "@/server/db/schema";
@@ -11,33 +6,81 @@ import { or, ilike } from "drizzle-orm";
 
 export async function GET(request: NextRequest) {
   try {
-    const {searchParams} = new URL(request.url); // Lấy query parameters từ URL, ví dụ: ?q=你好 hoặc ?query=ni3 hao3
-    const q = searchParams.get("q") || searchParams.get("query") || ""; // Lấy từ khóa tìm kiếm từ query parameter "q" hoặc "query"
+    const { searchParams } = new URL(request.url);
+    const q = searchParams.get("q") || searchParams.get("query") || "";
+    const mode = searchParams.get("mode") || "all";
 
-    // 1. Kiểm tra nếu không có từ khóa
     if (!q || !q.trim()) {
       return NextResponse.json({ results: [] });
     }
 
-    // 2. Chuẩn hóa từ khóa bằng hàm vừa viết
     const normalized = normalizeSearchQuery(q);
+
+    // Xử lý Pinyin không dấu cách (biến "ni hao" -> "nihao")
+    const pinyinNoSpace = normalized.cleanPinyin.replace(/\s+/g, "");
 
     let results = [];
 
-    // 3. Truy vấn Database dựa vào isHanzi
-    if (normalized.isHanzi) {
-      // TODO: viết truy vấn khi là chữ Hán!
-      results = await db.select().from(words).where(ilike(words.hanzi, `%${normalized.trimmed}%`)).limit(20);
-    } else {
-      // TODO: viết truy vấn khi là chữ Latinh!
-        results = await db.select().from(words).where(or(
-            ilike(words.pinyinClean, `%${normalized.cleanPinyin}%`),  // Tìm kiếm pinyin không dấu
-            ilike(words.pinyin, `%${normalized.cleanPinyin}%`),  // Tìm kiếm cả pinyin có dấu và không dấu
-            ilike(words.meaningVi, `%${normalized.trimmed}%`),  // Tìm kiếm nghĩa tiếng Việt
-            ilike(words.meaningVi, `%${normalized.cleanVietnamese}%`), // Tìm kiếm nghĩa tiếng Việt đã chuẩn hóa
-            ilike(words.hanviet, `%${normalized.cleanVietnamese}%`),  // Tìm kiếm âm Hán-Việt đã chuẩn hóa
-            ilike(words.meaningEn, `%${normalized.trimmed}%`),  // Tìm kiếm nghĩa tiếng Anh
-        )).limit(20);
+    // 1. Chế độ CHỈ TRA TRUNG -> VIỆT (Chữ Hán & Pinyin)
+    if (mode === "zh-vi") {
+      if (normalized.isHanzi) {
+        results = await db
+          .select()
+          .from(words)
+          .where(ilike(words.hanzi, `%${normalized.trimmed}%`))
+          .limit(20);
+      } else {
+        results = await db
+          .select()
+          .from(words)
+          .where(
+            or(
+              ilike(words.pinyinClean, `%${normalized.cleanPinyin}%`),
+              ilike(words.pinyinClean, `%${pinyinNoSpace}%`),
+              ilike(words.pinyin, `%${normalized.cleanPinyin}%`)
+            )
+          )
+          .limit(20);
+      }
+    } 
+    // 2. Chế độ CHỈ TRA VIỆT -> TRUNG (Nghĩa tiếng Việt & Âm Hán-Việt)
+    else if (mode === "vi-zh") {
+      results = await db
+        .select()
+        .from(words)
+        .where(
+          or(
+            ilike(words.meaningVi, `%${normalized.trimmed}%`),
+            ilike(words.meaningVi, `%${normalized.cleanVietnamese}%`),
+            ilike(words.hanviet, `%${normalized.cleanVietnamese}%`)
+          )
+        )
+        .limit(20);
+    } 
+    // 3. Chế độ TẤT CẢ (Tìm kiếm thông minh hỗn hợp)
+    else {
+      if (normalized.isHanzi) {
+        results = await db
+          .select()
+          .from(words)
+          .where(ilike(words.hanzi, `%${normalized.trimmed}%`))
+          .limit(20);
+      } else {
+        results = await db
+          .select()
+          .from(words)
+          .where(
+            or(
+              ilike(words.pinyinClean, `%${normalized.cleanPinyin}%`),
+              ilike(words.pinyinClean, `%${pinyinNoSpace}%`), // Thêm dòng này để khớp "ni hao" với "nihao"
+              ilike(words.pinyin, `%${normalized.cleanPinyin}%`),
+              ilike(words.meaningVi, `%${normalized.trimmed}%`),
+              ilike(words.meaningVi, `%${normalized.cleanVietnamese}%`),
+              ilike(words.hanviet, `%${normalized.cleanVietnamese}%`)
+            )
+          )
+          .limit(20);
+      }
     }
 
     return NextResponse.json({ results });
